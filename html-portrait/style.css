@@ -1,11 +1,22 @@
 body {
   background-image: url("assets/sky.gif");
+  font-family: "Isometra", serif;
   background-size: cover;
   height: 100vh;
 }
 
+#line1{
+  color:lightgreen;
+}
+#line2{
+  color:green;
+}
+#line3{
+  color:darkgreen;
+}
+
 img {
-  height: 150px;
+  /*height: 150px;*/
   border-radius: 20px;
   padding: 10px;
   transition: 1s;
@@ -30,7 +41,7 @@ p:hover {
   align-items: center;
 }
 
-h1,
+p,
 a {
   animation: coolAnimation 3s infinite;
 }
