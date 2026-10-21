@@ -6,7 +6,7 @@
         <link rel="stylesheet" href="style.css">
     </head>
     <body class="p4">
-
+        <audio id="nature" src="assets/nature.mp3" loop></audio>
         <h1 class="info-title">How You Can Make an Impact</h1>
         <p class="info-intro">
             The Boundary Waters is a connected landscape of lakes, forests, wildlife, and communities. People can help protect its clean water by speaking up about mining proposals, supporting communities affected by fires, and following fire safety guidance.
@@ -41,5 +41,15 @@
         <script>
             localStorage.clear();
         </script>
+        <script>
+            var nature = document.getElementById("nature");
+            nature.volume = 1;
+            function startNature() {
+                nature.play();
+            }
+            nature.play().catch(function() { });
+            document.addEventListener("click", startNature);
+            document.addEventListener("keydown", startNature);
+    </script>
     </body>
 </html>

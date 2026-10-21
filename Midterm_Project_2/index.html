@@ -6,6 +6,7 @@ x<html lang="en">
         <link rel="stylesheet" href="style.css">
     </head>
     <body class = "home">
+        <audio id="nature" src="assets/nature.mp3" loop></audio>
         <div class = "div-container">
             <a class="map-button thumb-spot" href="Thumb_Fire.html">Thumb Fire</a>
             <a class="map-button wolfpack-spot" href="Wolfpack_Fire.html">Wolfpack Fire</a>
@@ -15,5 +16,15 @@ x<html lang="en">
             <a class="map-button littleknife-spot" href="Little_Knife_Fire.html">Little Knife Fire</a>
             <a class="map-button twinmetals-spot" href="Twin_Metals_Mine.html">Twin Metals Mine</a>
         </div>
+    <script>
+        var nature = document.getElementById("nature");
+        nature.volume = 1;
+        function startNature() {
+            nature.play();
+        }
+        nature.play().catch(function() { });
+        document.addEventListener("click", startNature);
+        document.addEventListener("keydown", startNature);
+    </script>
     </body>
 </html>

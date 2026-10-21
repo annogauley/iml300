@@ -6,6 +6,26 @@
         <link rel="stylesheet" href="style.css">
     </head>
     <body class = "p8">
+        <audio id="nature" src="assets/nature.mp3" loop></audio>
+        <audio id="fire" src="assets/fire.mp3" loop></audio>
+        <script>
+            var pageName = "LittleKnife";
+        var allPages = ["Thumb", "Wolfpack", "Sioux", "BearTrap", "Camp", "LittleKnife", "TwinMetals"];
+        localStorage.setItem("visited-" + pageName, "yes");
+        function checkAllVisited() {
+            for (var i = 0; i < allPages.length; i++) {
+                if (localStorage.getItem("visited-" + allPages[i]) !== "yes") {
+                    return false;
+                }
+            }
+            return true;
+        }
+        setTimeout(function() {
+            if (checkAllVisited() == true) {
+                window.location.href = "info.html";
+            }
+        }, 3000);
+        </script>
         <div class = "new-background little-knife-after"></div>
         <div class="peek p8"></div>
         <div class = "scroll-box">
@@ -42,6 +62,32 @@ Reservations for the 2027 summer quota-permit season are expected to open Jan. 2
             right + "px " + bottom + "px, " +
             left + "px " + bottom + "px)";
             });
+    </script>
+    <script>
+        var nature = document.getElementById("nature");
+        var fire = document.getElementById("fire");
+        var fadeTime = 15;
+        var fireMax = 0.3;
+        nature.volume = 1;
+        fire.volume = 0;
+        var startTime = Date.now();
+        function startSounds(){
+            nature.play();
+            fire.play();
+        }
+        nature.play().catch(function() {
+            document.addEventListener("click", startSounds);
+        });
+        fire.play().catch(function() { });
+        setInterval(function() {
+            var seconds = (Date.now() - startTime) / 1000;
+            var progress = seconds / fadeTime;
+        if (progress > 1) {
+            progress = 1;
+        }
+        nature.volume = 1 - progress;
+        fire.volume = progress * fireMax;
+        }, 100);
     </script>
     </body>
 </html>

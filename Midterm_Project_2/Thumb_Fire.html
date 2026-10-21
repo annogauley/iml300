@@ -6,28 +6,28 @@
         <link rel="stylesheet" href="style.css">
     </head>
     <body class = "p1">
+        <audio id="nature" src="assets/nature.mp3" loop></audio>
+        <audio id="fire" src="assets/fire.mp3" loop></audio>
         <script>
             var pageName = "Thumb";
-            localStorage.setItem("visited-" + pageName, "yes");
-            var allPages = ["Thumb", "Wolfpack", "Sioux", "BearTrap", "Camp", "LittleKnife", "TwinMetals"];
-            
-            function checkAllVisited() {
-                for (var i = 0; i < allPages.length; i++) {
-                    if (localStorage.getItem("visited-" + allPages[i]) !== "yes") {
-                        return false;
-                    }
+        var allPages = ["Thumb", "Wolfpack", "Sioux", "BearTrap", "Camp", "LittleKnife", "TwinMetals"];
+        localStorage.setItem("visited-" + pageName, "yes");
+        function checkAllVisited() {
+            for (var i = 0; i < allPages.length; i++) {
+                if (localStorage.getItem("visited-" + allPages[i]) !== "yes") {
+                    return false;
                 }
-                return true;
             }
-            
-            setTimeout(function() {
-                if (checkAllVisited() == true) {
-                    window.location.href = "info.html";
-                }
-            }, 10000);
+            return true;
+        }
+        setTimeout(function() {
+            if (checkAllVisited() == true) {
+                window.location.href = "info.html";
+            }
+        }, 3000);
         </script>
         <div class = "new-background thumb-after"></div>
-        <div class="peek p3"></div>
+        <div class="peek p1"></div>
         <div class = "scroll-box">
             <div class = "scroll-track">
                 <p class = "scroll-text"> The U.S. Forest Service is closing public access to a large swath of the Boundary Waters Canoe Area Wilderness because of multiple wildfires and continued dry conditions. 
@@ -72,6 +72,32 @@ Correction (July 11, 2026): An earlier version of this story misstated the name 
             right + "px " + bottom + "px, " +
             left + "px " + bottom + "px)";
             });
+    </script>
+    <script>
+        var nature = document.getElementById("nature");
+        var fire = document.getElementById("fire");
+        var fadeTime = 15;
+        var fireMax = 0.3;
+        nature.volume = 1;
+        fire.volume = 0;
+        var startTime = Date.now();
+        function startSounds(){
+            nature.play();
+            fire.play();
+        }
+        nature.play().catch(function() {
+            document.addEventListener("click", startSounds);
+        });
+        fire.play().catch(function() { });
+        setInterval(function() {
+            var seconds = (Date.now() - startTime) / 1000;
+            var progress = seconds / fadeTime;
+        if (progress > 1) {
+            progress = 1;
+        }
+        nature.volume = 1 - progress;
+        fire.volume = progress * fireMax;
+        }, 100);
     </script>
     </body>
 </html>
