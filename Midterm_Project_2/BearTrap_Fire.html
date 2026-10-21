@@ -7,6 +7,7 @@
     </head>
     <body class = "p4">
         <div class = "new-background beartrap-after"></div>
+        <div class="peek p4"></div>
         <div class = "scroll-box">
             <div class = "scroll-track">
                 <p class = "scroll-text"> BOUNDARY WATERS — Firefighters are shifting their focus to the largest fire burning in the Boundary Waters Canoe Area Wilderness as it draws nearer to residences and resorts on the Echo Trail.
@@ -24,7 +25,7 @@ Stroberg estimated about 90% of the Boundary Waters has been checked for campers
 He said officials are tracking one group that is making its way out of the wilderness. The number of rangers sweeping the Boundary Waters has increased to 30, with two to a canoe, he said, and it may take three to four more days to finish the sweep.
                 </p>
             </div>
-        <img class="flames" src="assets/BWCA_fire.png" alt="Flames at the bottom of the screen">
+        <img class="flames" src="assets/BWCA_fire.gif" alt="Flames at the bottom of the screen">
         </div>
     <a class="fire-button spot-bottom-left" href="Sioux_Fire.html">Sioux Fire</a>
     <a class="fire-button spot-middle-left" href="Wolfpack_Fire.html">Wolfpack Fire</a>
@@ -32,5 +33,20 @@ He said officials are tracking one group that is making its way out of the wilde
     <a class="fire-button spot-middle-right" href="Little_Knife_Fire.html">Little Knife Fire</a>
     <a class="fire-button spot-bottom-right" href="BearTrap_Fire.html">Camp Fire</a>
     <a class="fire-button spot-bottom-middle" href="Twin_Metals_Mine.html">Twin Metals Mine</a>
+    <script>
+        var square = document.querySelector(".peek");
+        var half = 150;
+        document.addEventListener("mousemove", function(event) {
+            var left = event.clientX - half;
+            var right = event.clientX + half;
+            var top = event.clientY - half;
+            var bottom = event.clientY + half;
+            square.style.clipPath = "polygon(" +
+            left + "px " + top + "px, " +
+            right + "px " + top + "px, " +
+            right + "px " + bottom + "px, " +
+            left + "px " + bottom + "px)";
+            });
+    </script>
     </body>
 </html>

@@ -6,7 +6,28 @@
         <link rel="stylesheet" href="style.css">
     </head>
     <body class = "p1">
+        <script>
+            var pageName = "Thumb";
+            localStorage.setItem("visited-" + pageName, "yes");
+            var allPages = ["Thumb", "Wolfpack", "Sioux", "BearTrap", "Camp", "LittleKnife", "TwinMetals"];
+            
+            function checkAllVisited() {
+                for (var i = 0; i < allPages.length; i++) {
+                    if (localStorage.getItem("visited-" + allPages[i]) !== "yes") {
+                        return false;
+                    }
+                }
+                return true;
+            }
+            
+            setTimeout(function() {
+                if (checkAllVisited() == true) {
+                    window.location.href = "info.html";
+                }
+            }, 10000);
+        </script>
         <div class = "new-background thumb-after"></div>
+        <div class="peek p3"></div>
         <div class = "scroll-box">
             <div class = "scroll-track">
                 <p class = "scroll-text"> The U.S. Forest Service is closing public access to a large swath of the Boundary Waters Canoe Area Wilderness because of multiple wildfires and continued dry conditions. 
@@ -32,10 +53,25 @@ The Forest Service says it will continue to monitor conditions and make daily up
 Correction (July 11, 2026): An earlier version of this story misstated the name of the company owned by Jason Zabokrtsky.
                 </p>
             </div>
-        <img class="flames" src="assets/BWCA_fire.png" alt="Flames at the bottom of the screen">
+        <img class="flames" src="assets/BWCA_fire.gif" alt="Flames at the bottom of the screen">
         </div>
     <a class="fire-button spot-bottom-left" href="Wolfpack_Fire.html">Wolfpack Fire</a>
     <a class="fire-button spot-bottom-middle" href="Sioux_Fire.html">Sioux Fire</a>
     <a class="fire-button spot-bottom-right" href="BearTrap_Fire.html">Bear Trap Fire</a>
+    <script>
+        var square = document.querySelector(".peek");
+        var half = 150;
+        document.addEventListener("mousemove", function(event) {
+            var left = event.clientX - half;
+            var right = event.clientX + half;
+            var top = event.clientY - half;
+            var bottom = event.clientY + half;
+            square.style.clipPath = "polygon(" +
+            left + "px " + top + "px, " +
+            right + "px " + top + "px, " +
+            right + "px " + bottom + "px, " +
+            left + "px " + bottom + "px)";
+            });
+    </script>
     </body>
 </html>

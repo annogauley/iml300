@@ -7,6 +7,7 @@
     </head>
     <body class = "p5">
         <div class = "new-background camp-after"></div>
+        <div class="peek p5"></div>
         <div class = "scroll-box">
             <div class = "scroll-track">
                 <p class = "scroll-text"> ELY, Minn. (FOX 9) - Firefighters continue to battle the wildfires caused by the July Lightning Incident across northern Minnesota and neighboring Canada, where fires have burned a combined 73,585 acres.
@@ -33,11 +34,26 @@ Residents and property owners are also advised to check their county evacuation 
 Local burning restrictions should also be verified before taking part in any activities that could produce sparks or flames.
                 </p>
             </div>
-        <img class="flames" src="assets/BWCA_fire.png" alt="Flames at the bottom of the screen">
+        <img class="flames" src="assets/BWCA_fire.gif" alt="Flames at the bottom of the screen">
         </div>
     <a class="fire-button spot-top-left" href="Sioux_Fire.html">Sioux Fire</a>
     <a class="fire-button spot-top-middle" href="BearTrap_Fire.html">Bear Trap Fire</a>
     <a class="fire-button spot-top-right" href="Little_Knife_Fire.html">Little Knife Fire</a>
     <a class="fire-button spot-bottom-left" href="Twin_Metals_Mine.html">Twin Metals Mine</a>
+    <script>
+        var square = document.querySelector(".peek");
+        var half = 150;
+        document.addEventListener("mousemove", function(event) {
+            var left = event.clientX - half;
+            var right = event.clientX + half;
+            var top = event.clientY - half;
+            var bottom = event.clientY + half;
+            square.style.clipPath = "polygon(" +
+            left + "px " + top + "px, " +
+            right + "px " + top + "px, " +
+            right + "px " + bottom + "px, " +
+            left + "px " + bottom + "px)";
+            });
+    </script>
     </body>
 </html>

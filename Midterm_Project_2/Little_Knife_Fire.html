@@ -7,14 +7,41 @@
     </head>
     <body class = "p8">
         <div class = "new-background little-knife-after"></div>
+        <div class="peek p8"></div>
         <div class = "scroll-box">
             <div class = "scroll-track">
-                <p class = "scroll-text"> xxx
+                <p class = "scroll-text"> Post-fire assessments in the Boundary Waters Canoe Area Wilderness identified eight campsites that remain closed after the Little Knife Fire, along with three destroyed latrines that need replacement, according to U.S. Forest Service officials.
+Cathy Quinn, assistant wilderness program manager for the Superior National Forest, said assessments conducted in August and September, following containment of the Little Knife Fire, identified affected campsites around Gijikiki, Ottertrack, Topaz and Little Knife lakes, as well as the South Arm of Knife Lake.
+The Little Knife Fire, which originated in Canada, crossed the border into the U.S. in mid-July and burned nearly 5,000 acres near the end of the Gunflint Trail. Across the U.S.-Canada border, the fire burned approximately 80,000 acres in total.
+The Little Knife Fire was one of several wildfires that affected the Boundary Waters region during the summer. Across the Superior National Forest, fires burned over 66,000 acres, mostly in Lake and St. Louis counties on the western edge of the Boundary Waters.
+Quinn said all three replacement latrines have already been hauled to the sites surrounding the Little Knife Fire burn area, and Forest Service crews do not expect to use a sled dog crew to transport equipment into the wilderness this winter.
+Work to repair and remove hazardous trees on the impacted campsites and portages will continue in spring of 2027.
+In an update to the Cook County Board of Commissioners on Oct. 13, Superior National Forest Acting Supervisor Drew Stroberg said, “Our intent is to get as many of those areas open next spring. We’re still going to be up there looking for things like hazard trees and other things in those areas that we would need to take care of.”
+While Forest Service crews will work to reopen the eight campsites in summer 2027, a few may remain closed depending on the amount of work required.
+“We plan to reassess site conditions as soon as spring snowmelt allows crews to access the area. Sites will reopen once they meet safety and ecological standards,” Quinn said.
+Some sites with significant soil disturbance may also need rehabilitation to stabilize slopes and prevent erosion, Forest Service officials said. Those locations could remain closed into summer while crews complete the work and the landscape recovers.
+The ongoing recovery work comes as the BWCAW transitions into its non-quota permit season. Although the summer quota-permit season ended Sept. 30, visitors can continue entering the wilderness through April 30 using free, self-issued permits available at entry points and Forest Service offices. Reservations are not required during the non-quota season, but fire-related closures remain in effect where applicable.
+Reservations for the 2027 summer quota-permit season are expected to open Jan. 27 at 9 a.m. Central Time. Visitors can check permit availability and make reservations through Recreation.gov.
                 </p>
             </div>
-        <img class="flames" src="assets/BWCA_fire.png" alt="Flames at the bottom of the screen">
+        <img class="flames" src="assets/BWCA_fire.gif" alt="Flames at the bottom of the screen">
         </div>
     <a class="fire-button spot-middle-left" href="BearTrap_Fire.html">Bear Trap Fire</a>
     <a class="fire-button spot-bottom-left" href="Camp_Fire.html">Camp Fire</a>
+    <script>
+        var square = document.querySelector(".peek");
+        var half = 150;
+        document.addEventListener("mousemove", function(event) {
+            var left = event.clientX - half;
+            var right = event.clientX + half;
+            var top = event.clientY - half;
+            var bottom = event.clientY + half;
+            square.style.clipPath = "polygon(" +
+            left + "px " + top + "px, " +
+            right + "px " + top + "px, " +
+            right + "px " + bottom + "px, " +
+            left + "px " + bottom + "px)";
+            });
+    </script>
     </body>
 </html>

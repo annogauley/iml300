@@ -7,6 +7,7 @@
     </head>
     <body class = "p3">
         <div class = "new-background sioux-after"></div>
+        <div class="peek p3"></div>
         <div class = "scroll-box">
             <div class = "scroll-track">
                 <p class = "scroll-text"> ELY — Residents in northern Lake and St. Louis counties evacuated Monday and Tuesday, July 13-14, as extreme fire conditions fueled wildfire growth.
@@ -44,12 +45,27 @@ Southern and central St. Louis and Carlton counties are expected to hit a very u
 The PCA recommends avoiding physical activities outdoors.
                 </p>
             </div>
-        <img class="flames" src="assets/BWCA_fire.png" alt="Flames at the bottom of the screen">
+        <img class="flames" src="assets/BWCA_fire.gif" alt="Flames at the bottom of the screen">
         </div>
-    <a class="fire-button spot-top-left" href="Wolfpack_Fire.html">Wolfpack Fire</a>
+    <a class="fire-button spot-bottom-left" href="Wolfpack_Fire.html">Wolfpack Fire</a>
     <a class="fire-button spot-top-middle" href="Thumb_Fire.html">Thumb Fire</a>
     <a class="fire-button spot-middle-right" href="BearTrap_Fire.html">Bear Trap Fire</a>
     <a class="fire-button spot-bottom-right" href="Camp_Fire.html">Camp Fire</a>
     <a class="fire-button spot-bottom-middle" href="Twin_Metals_Mine.html">Twin Metals Mine</a>
+    <script>
+        var square = document.querySelector(".peek");
+        var half = 150;
+        document.addEventListener("mousemove", function(event) {
+            var left = event.clientX - half;
+            var right = event.clientX + half;
+            var top = event.clientY - half;
+            var bottom = event.clientY + half;
+            square.style.clipPath = "polygon(" +
+            left + "px " + top + "px, " +
+            right + "px " + top + "px, " +
+            right + "px " + bottom + "px, " +
+            left + "px " + bottom + "px)";
+            });
+    </script>
     </body>
 </html>

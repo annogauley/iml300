@@ -7,6 +7,7 @@
     </head>
     <body class = "p2">
         <div class = "new-background wolfpack-after"></div>
+        <div class="peek p2"></div>
         <div class = "scroll-box">
             <div class = "scroll-track">
                 <p class = "scroll-text"> ELY — Two fires burning in the Superior National Forest merged, and a new fire is burning in the Boundary Waters after crossing the Canadian border.
@@ -42,10 +43,25 @@ Very few people have gone to the evacuation center in Babbitt for assistance, an
 "We know people want to help, and we really appreciate that. It's what makes our region such an awesome place. But the reality is, food and clothing donations often go to waste in disasters.
                 </p>
             </div>
-        <img class="flames" src="assets/BWCA_fire.png" alt="Flames at the bottom of the screen">
+        <img class="flames" src="assets/BWCA_fire.gif" alt="Flames at the bottom of the screen">
         </div>
     <a class="fire-button spot-top-middle" href="Wolfpack_Fire.html">Wolfpack Fire</a>
     <a class="fire-button spot-bottom-right" href="Sioux_Fire.html">Sioux Fire</a>
     <a class="fire-button spot-middle-right" href="BearTrap_Fire.html">Bear Trap Fire</a>
+    <script>
+        var square = document.querySelector(".peek");
+        var half = 150;
+        document.addEventListener("mousemove", function(event) {
+            var left = event.clientX - half;
+            var right = event.clientX + half;
+            var top = event.clientY - half;
+            var bottom = event.clientY + half;
+            square.style.clipPath = "polygon(" +
+            left + "px " + top + "px, " +
+            right + "px " + top + "px, " +
+            right + "px " + bottom + "px, " +
+            left + "px " + bottom + "px)";
+            });
+    </script>
     </body>
 </html>

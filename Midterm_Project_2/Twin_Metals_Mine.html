@@ -7,6 +7,7 @@
     </head>
     <body class = "p9">
         <div class = "new-background twin-metals-after"></div>
+        <div class="peek p9"></div>
         <div class = "scroll-box">
             <div class = "scroll-track">
                 <p class = "scroll-text"> The Minnesota Department of Natural Resources has given the go-ahead to additional underground mineral exploration near Ely, just outside the Boundary Waters Canoe Area Wilderness, despite opposition from some environmental groups. The plan allows Franconia Minerals, a subsidiary of Twin Metals Minnesota, to drill exploratory borings on state mineral leases at up to 19 drill pads on the north and south sides of Birch Lake, about 12 miles south of Ely. The area is just south of where Twin Metals has proposed building an underground mine for copper, nickel and other precious metals. The DNR’s approval, granted Monday, gives Twin Metals just over two years to complete the exploratory work. In an interview with MPR News in November when it submitted its plan, Twin Metals spokesperson Kathy Graul said it’s part of its broader work to map out the mineral deposits in the area. Graul said some of the drilling will bore deep underneath Birch Lake, part of the Kawishiwi River system, which flows into the Boundary Waters.Twin Metals says the work is routine. The company recently drilled exploratory holes at about six sites in the same general vicinity in 2023 and 2024. Twin Metals would have to submit a mining plan to state officials and go through years of review and permitting before any actual mining would be allowed.
@@ -21,5 +22,20 @@ But critics argue this kind of mining is much more environmentally risky than ir
     <a class="fire-button spot-top-left" href="Sioux_Fire.html">Wolfpack Fire</a>
     <a class="fire-button spot-top-middle" href="BearTrap_Fire.html">Bear Trap Fire</a>
     <a class="fire-button spot-top-right" href="Camp_Fire.html">Camp Fire</a>
+    <script>
+        var square = document.querySelector(".peek");
+        var half = 150;
+        document.addEventListener("mousemove", function(event) {
+            var left = event.clientX - half;
+            var right = event.clientX + half;
+            var top = event.clientY - half;
+            var bottom = event.clientY + half;
+            square.style.clipPath = "polygon(" +
+            left + "px " + top + "px, " +
+            right + "px " + top + "px, " +
+            right + "px " + bottom + "px, " +
+            left + "px " + bottom + "px)";
+            });
+    </script>
     </body>
 </html>
