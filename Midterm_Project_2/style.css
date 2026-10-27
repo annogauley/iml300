@@ -1,3 +1,11 @@
+canvas{
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    display: block;
+}
+
 .home{
     background-image: url("assets/BWCA_MAP3.png.webp");
     background-repeat: no-repeat;

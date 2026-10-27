@@ -7,6 +7,7 @@
     </head>
     <body class = "p9">
         <audio id="nature" src="assets/nature.mp3" loop></audio>
+        <audio id="mine" src="assets/mine.mp3" loop></audio>
         <script>
             var pageName = "TwinMetals";
         var allPages = ["Thumb", "Wolfpack", "Sioux", "BearTrap", "Camp", "LittleKnife", "TwinMetals"];
@@ -55,6 +56,32 @@ But critics argue this kind of mining is much more environmentally risky than ir
             right + "px " + bottom + "px, " +
             left + "px " + bottom + "px)";
             });
+    </script>
+    <script>
+        var nature = document.getElementById("nature");
+        var mine = document.getElementById("mine");
+        var fadeTime = 15;
+        var mineMax = 0.3;
+        nature.volume = 1;
+        mine.volume = 0;
+        var startTime = Date.now();
+        function startSounds(){
+            nature.play();
+            mine.play();
+        }
+        nature.play().catch(function() {
+            document.addEventListener("click", startSounds);
+        });
+        mine.play().catch(function() { });
+        setInterval(function() {
+            var seconds = (Date.now() - startTime) / 1000;
+            var progress = seconds / fadeTime;
+        if (progress > 1) {
+            progress = 1;
+        }
+        nature.volume = 1 - progress;
+        mine.volume = progress * mineMax;
+        }, 100);
     </script>
     </body>
 </html>
