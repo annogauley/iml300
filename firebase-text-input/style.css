@@ -1,6 +1,6 @@
 body {
-  background-color: #d9d2e9;
-  font-family: Helvetica, sans-serif;
+  background-color: darkseagreen;
+  font-family: 'Times new Roman', sans-serif;
 }
 
 .container {
@@ -29,7 +29,7 @@ input {
 }
 
 .response{
-  background-color: #b299ed;
+  background-color: darkgreen;
   color:white;
   margin:0.2em;
   padding: 1em;
