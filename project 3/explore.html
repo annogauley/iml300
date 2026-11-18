@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Explore | Third Place</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;800&family=Instrument+Sans:wght@400;600&family=DM+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="wrap">
+    <h2 id="title">Explore</h2>
+    <div class="explore">
+
+      <!-- LEFT: filters. Any change re-runs renderEvents() -->
+      <aside>
+        <label>Search <input type="text" id="f-q"></label>
+        <label>Category
+          <select id="f-cat">
+            <option value="">All</option>
+            <option>Arts</option><option>Outdoor</option><option>Games</option>
+            <option>Music</option><option>Community</option><option>Food</option>
+          </select>
+        </label>
+        <label><input type="checkbox" id="f-solo"> Going solo?</label>
+        <label><input type="checkbox" id="f-beginner"> Beginner-friendly</label>
+        <label><input type="checkbox" id="f-free"> Free only</label>
+        <label>Sort by
+          <select id="f-sort">
+            <option value="">Recommended</option>
+            <option value="popular">Most popular</option>
+            <option value="cheap">Price: low to high</option>
+          </select>
+        </label>
+      </aside>
+
+      <!-- RIGHT: results -->
+      <main>
+        <p class="mono" id="count"></p>
+        <div class="grid" id="results"></div>
+      </main>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="data.js"></script>
+  <script src="main.js"></script>
+  <script>
+    // Read the URL: explore.html?cat=Arts&q=pottery&saved=1
+    var params = new URLSearchParams(window.location.search);
+    $("#f-cat").val(params.get("cat") || "");
+    $("#f-q").val(params.get("q") || "");
+    window.showSavedOnly = params.get("saved") === "1";
+    if (showSavedOnly) $("#title").text("Saved");
+
+    function renderEvents() {
+      var q = $("#f-q").val().toLowerCase();
+      var cat = $("#f-cat").val();
+      var saved = load("saved");
+
+      // filter() keeps only the events that pass every test
+      var list = events.filter(function (e) {
+        if (showSavedOnly && saved.indexOf(e.id) === -1) return false;
+        if (cat && e.cat !== cat) return false;
+        if (q && (e.title + e.host + e.place).toLowerCase().indexOf(q) === -1) return false;
+        if ($("#f-solo").is(":checked") && !e.solo) return false;
+        if ($("#f-beginner").is(":checked") && !e.beginner) return false;
+        if ($("#f-free").is(":checked") && e.price > 0) return false;
+        return true;
+      });
+
+      // sort()
+      var s = $("#f-sort").val();
+      if (s === "popular") list.sort(function (a, b) { return b.going - a.going; });
+      if (s === "cheap") list.sort(function (a, b) { return a.price - b.price; });
+
+      // draw the cards
+      $("#results").empty();
+      $.each(list, function (i, e) { $("#results").append(eventCard(e)); });
+      $("#count").text(list.length + " events");
+      if (list.length === 0) $("#results").html("<p>Nothing matches. Try removing a filter.</p>");
+    }
+
+    $("aside input, aside select").on("input change", renderEvents);
+    renderEvents();   // show results when the page first loads
+  </script>
+</body>
+</html>

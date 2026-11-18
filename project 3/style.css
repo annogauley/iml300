@@ -1,0 +1,125 @@
+/* ===== 1. VARIABLES: change a colour here and it changes everywhere ===== */
+:root {
+  --cream: #FFF6E3;      /* page background */
+  --paper: #FFFDF5;      /* white-ish note */
+  --forest: #1F3D33;     /* text */
+  --board: #1F5042;      /* dark green bulletin board */
+  --red: #D1432F;
+  --coral: #F77C5E;      /* buttons */
+  --yellow: #F8DF5E;
+  --pink: #F0ACC8;
+  --blue: #A5B4EE;
+  --mint: #B8DBC3;
+  --orange: #F4B16B;
+  --sand: #F5E8D0;
+  --serif: 'Fraunces', Georgia, serif;
+  --sans: 'Instrument Sans', Arial, sans-serif;
+  --mono: 'DM Mono', monospace;
+}
+
+/* ===== 2. BASICS ===== */
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--cream); color: var(--forest); font-family: var(--sans); line-height: 1.5; }
+a { color: inherit; }
+h1, h2, h3 { font-family: var(--serif); line-height: 1.02; margin: 0 0 .6rem; letter-spacing: -.02em; }
+h1 { font-size: clamp(3rem, 8vw, 6.5rem); font-weight: 800; }
+h2 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 800; }
+.mono { font-family: var(--mono); font-size: .8rem; }
+
+/* .wrap = centered content. .band = full-width coloured stripe whose text lines up with .wrap */
+.wrap { max-width: 1200px; margin: 0 auto; padding: 4rem 1.5rem; }
+.band { padding: 4rem max(1.5rem, calc((100vw - 1200px) / 2)); }
+
+/* ===== 3. SECTION COLOURS: add one of these classes next to "band" ===== */
+.board { background-color: var(--board); color: var(--cream);
+         background-image: linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px),
+                           linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px);
+         background-size: 40px 40px; }                       /* the grid-paper look */
+.sand { background: var(--sand); }
+.bg-blue { background: var(--blue); }
+.bg-yellow { background: var(--yellow); }
+
+/* ===== 4. NAVIGATION (built by main.js) ===== */
+nav { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; padding: 1rem 1.5rem;
+      border-bottom: 2px solid var(--forest); }
+nav .logo { font: 800 1.8rem var(--serif); color: var(--red); text-decoration: none; margin-right: auto; }
+nav a { text-decoration: none; font-weight: 600; }
+nav a:hover { color: var(--red); }
+
+/* ===== 5. BUTTONS + PILLS ===== */
+.btn { display: inline-block; background: var(--coral); color: var(--forest); border: 2px solid var(--forest);
+       padding: .7rem 1.2rem; font: 600 1rem var(--sans); cursor: pointer; text-decoration: none;
+       box-shadow: 4px 4px 0 var(--forest); }
+.btn:hover { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--forest); }
+.btn.joined, .save-btn.on { background: var(--forest); color: var(--yellow); }
+.save-btn { background: var(--paper); border: 1.5px solid var(--forest); padding: .3rem .8rem;
+            cursor: pointer; font: .85rem var(--mono); }
+.pills { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1rem; }
+.pill { padding: .5rem 1.2rem; border: 1.5px solid var(--forest); border-radius: 999px; text-decoration: none; font-weight: 600; }
+.pill:hover { background: var(--forest) !important; color: var(--cream); }
+
+/* ===== 6. STICKY NOTES: the main building block =====
+   Add "note" plus a colour class to anything: <div class="note pink"> */
+.note { position: relative; border: 1.5px solid rgba(31,61,51,.25); color: var(--forest);
+        box-shadow: 6px 6px 0 rgba(0,0,0,.18); }
+.note::before { content: ""; position: absolute; top: -12px; left: 50%; width: 90px; height: 26px;
+                margin-left: -45px; background: rgba(230,200,150,.85); transform: rotate(-3deg); } /* tape */
+.yellow { background: var(--yellow); } .pink { background: var(--pink); } .blue { background: var(--blue); }
+.mint { background: var(--mint); }     .orange { background: var(--orange); } .paper { background: var(--paper); }
+.grid .note:nth-child(3n+1), .row .note:nth-child(3n+1) { transform: rotate(-1.2deg); } /* slight tilts */
+.grid .note:nth-child(3n+2), .row .note:nth-child(3n+2) { transform: rotate(.8deg); }
+.grid .note:nth-child(3n), .row .note:nth-child(3n) { transform: rotate(-.4deg); }
+
+/* ===== 7. HERO ===== */
+.hero { display: grid; grid-template-columns: 1.3fr 1fr; gap: 3rem; align-items: center; }
+.hero h1 span { color: var(--red); }
+.hero form { display: flex; flex-wrap: wrap; gap: .5rem; margin: 1.5rem 0; }
+.hero input { flex: 1 1 200px; padding: .8rem; border: 2px solid var(--forest); background: var(--paper); font: 1rem var(--sans); }
+.collage { position: relative; height: 440px; }
+.burst { position: absolute; top: -30px; left: -20px; font-size: 7rem; color: var(--coral); line-height: 1; }
+.photo { position: absolute; border: 8px solid var(--paper); box-shadow: 4px 5px 0 rgba(0,0,0,.2);
+         display: flex; align-items: flex-end; padding: .5rem; font: .75rem var(--mono); }
+.photo:nth-of-type(1) { width: 52%; height: 55%; bottom: 0; left: 0; transform: rotate(-4deg); background: var(--mint); }
+.photo:nth-of-type(2) { width: 48%; height: 45%; bottom: 5%; right: 0; transform: rotate(3deg); background: var(--blue); }
+.hero .note { position: absolute; top: 5%; right: 5%; width: 75%; padding: 1.5rem 1.5rem 2rem;
+              transform: rotate(2deg); z-index: 2; }
+.hero .note h3 { font-size: 2rem; }
+
+/* ===== 8. CATEGORY NOTES ===== */
+.cats { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 2rem; margin-top: 2.5rem; }
+.cat { display: block; padding: 2.5rem 1.2rem 1.2rem; text-decoration: none; }
+.cat:nth-child(odd) { transform: rotate(-1.5deg); } .cat:nth-child(even) { transform: rotate(1.2deg); }
+.cat:hover { transform: rotate(0) scale(1.03); }
+.cat:nth-child(6n+1) { background: var(--yellow); } .cat:nth-child(6n+2) { background: var(--pink); }
+.cat:nth-child(6n+3) { background: var(--blue); }   .cat:nth-child(6n+4) { background: var(--mint); }
+.cat:nth-child(6n+5) { background: var(--orange); } .cat:nth-child(6n)   { background: var(--paper); }
+
+/* ===== 9. EVENT + COMMUNITY CARDS ===== */
+.row { display: flex; gap: 2rem; overflow-x: auto; padding: 1.5rem .5rem 2rem; }
+.card { flex: 0 0 280px; display: flex; flex-direction: column; }
+.card .pic { height: 150px; margin: 1.2rem 1rem 0; display: flex; align-items: flex-end; padding: .5rem;
+             border: 2px dashed rgba(31,61,51,.4); font: .75rem var(--mono); } /* swap for a real <img> */
+.card .body { padding: 1rem; display: flex; flex-direction: column; gap: .4rem; flex: 1; align-items: flex-start; }
+.card h3 { font-size: 1.5rem; margin: 0; }
+.tag { display: inline-block; background: var(--paper); border: 1px solid var(--forest); border-radius: 99px;
+       padding: 0 .6rem; font: .72rem var(--mono); margin: 0 .25rem .25rem 0; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 2rem; }
+.grid .card { flex: auto; }
+
+/* ===== 10. POLL + CTA ===== */
+#poll { background: var(--paper); padding: 0; margin-top: 1.5rem; }
+.cta { text-align: left; }
+
+/* ===== 11. EXPLORE PAGE ===== */
+.explore { display: grid; grid-template-columns: 240px 1fr; gap: 2rem; }
+.explore aside { background: var(--mint); padding: 1rem; border: 2px solid var(--forest); align-self: start; }
+.explore aside label { display: block; margin: .6rem 0; font-weight: 600; }
+.explore aside select, .explore aside input[type=text] { width: 100%; padding: .4rem; }
+
+footer { background: var(--board); color: var(--cream); padding: 2rem max(1.5rem, calc((100vw - 1200px) / 2)); }
+
+/* ===== 12. MOBILE ===== */
+@media (max-width: 800px) {
+  .hero, .explore { grid-template-columns: 1fr; }
+  .collage { height: 380px; }
+}

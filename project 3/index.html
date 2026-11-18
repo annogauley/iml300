@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Third Place: Find your people. Find your place.</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;800&family=Instrument+Sans:wght@400;600&family=DM+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- the <nav> is added here by main.js -->
+
+  <!-- HERO -->
+  <header class="wrap hero">
+    <div>
+      <h1>Find your people. <span>Find your place.</span></h1>
+      <p>Discover local communities, explore new interests, and find something worth showing up for.</p>
+      <form id="search">
+        <input id="q" type="text" placeholder="What are you interested in?">
+        <input id="where" type="text" placeholder="Where are you looking?">
+        <button class="btn" type="submit">Find your third place</button>
+      </form>
+      <p class="mono">LESS SCROLLING. MORE SHOWING UP.</p>
+      <!-- Quick-pick pills: filled in by the script at the bottom -->
+      <div class="pills" id="pills"></div>
+    </div>
+    <div class="collage">
+      <div class="burst">&#10040;</div>
+      <div class="note yellow">
+        <h3>You don't need a reason to belong here.</h3>
+        <p>Pull up a chair. Stay a while. Your third place is out there.</p>
+      </div>
+      <div class="photo">photo: climbing</div>
+      <div class="photo">photo: pottery</div>
+    </div>
+  </header>
+
+  <!-- EXPLORE BY INTEREST (tiles are filled in by the script at the bottom) -->
+  <section class="band board">
+    <h2>There's something out there for everyone.</h2>
+    <div class="cats" id="cats"></div>
+  </section>
+
+  <!-- HAPPENING NEAR YOU -->
+  <section class="band sand">
+    <h2>Happening near you</h2>
+    <div class="row" id="event-row"></div>
+    <a class="btn" href="explore.html">View all events</a>
+  </section>
+
+  <!-- COMMUNITIES -->
+  <section class="band" id="communities">
+    <h2>Not just something to do. Somewhere to belong.</h2>
+    <div class="grid" id="community-grid"></div>
+  </section>
+
+  <!-- POLL: a p5.js sketch, inspired by the sticker-dot boards -->
+  <section class="band bg-blue">
+    <h2>What brings you to a third place?</h2>
+    <p>Pick a reason. Click a column to leave your dot.</p>
+    <div id="poll"></div>
+  </section>
+
+  <!-- CLOSING CTA -->
+  <section class="band bg-yellow cta">
+    <h2>Your next favorite thing could be just around the corner.</h2>
+    <p>You don't need to know anyone. You just need to show up.</p>
+    <a class="btn" href="explore.html">Explore what's out there</a>
+  </section>
+
+  <footer><strong>Third Place</strong> / Less scrolling. More showing up.</footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.min.js"></script>
+  <script src="data.js"></script>
+  <script src="main.js"></script>
+  <script>
+    // Fill the category tiles. Each links to explore.html?cat=Arts (etc.)
+    $.each(categories, function (i, c) {
+      $("#cats").append('<a class="cat note" href="explore.html?cat=' + c.key + '">' +
+        '<h3>' + c.title + '</h3><p>' + c.text + '</p></a>');
+    });
+
+    // Quick-pick pills, each a different colour
+    var pillColors = ['yellow', 'pink', 'blue', 'mint', 'orange', 'paper'];
+    $.each(categories, function (i, c) {
+      $("#pills").append('<a class="pill ' + pillColors[i] + '" href="explore.html?cat=' + c.key + '">' + c.title.split(' & ')[0] + '</a>');
+    });
+
+    // Fill the event row and the community grid
+    $.each(events, function (i, e) { $("#event-row").append(eventCard(e)); });
+    $.each(communities, function (i, c) { $("#community-grid").append(communityCard(c)); });
+
+    // Search form: send the words to the Explore page in the URL
+    $("#search").on("submit", function (ev) {
+      ev.preventDefault();                               // stop the normal page reload
+      window.location = "explore.html?q=" + encodeURIComponent($("#q").val());
+    });
+
+    // ---------- p5.js dot poll ----------
+    var labels = ["Meeting people", "A quiet moment", "Making things", "Feeling local"];
+    var colors = ["#D1432F", "#E9B52E", "#2F9A6B", "#4A68D6"];  // red, yellow, green, blue dots
+    var dots = [];                                        // each dot: {x, y, col}
+
+    function addDot(col, x) {                             // x = where to center the dot
+      var colW = width / 4;
+      dots.push({ col: col, x: x || col * colW + random(30, colW - 30), y: random(60, height - 20) });
+    }
+
+    function setup() {                                    // p5 runs this once
+      var c = createCanvas(document.getElementById("poll").clientWidth, 320);
+      c.parent("poll");
+      for (var i = 0; i < 40; i++) addDot(floor(random(4)));   // starter dots
+    }
+
+    function draw() {                                     // p5 runs this ~60 times a second
+      background("#FFFDF5");
+      textFont("DM Mono"); textSize(13); fill("#1F3D33"); noStroke();
+      for (var i = 0; i < 4; i++) {
+        text(labels[i], i * width / 4 + 10, 25);
+        if (i > 0) stroke("#1F3D33"), line(i * width / 4, 0, i * width / 4, height), noStroke();
+      }
+      for (var d of dots) { fill(colors[d.col]); ellipse(d.x, d.y, 22); }
+    }
+
+    function mousePressed() {                             // p5 runs this on every click
+      if (mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < height) {
+        dots.push({ col: floor(mouseX / (width / 4)), x: mouseX, y: mouseY });
+      }
+    }
+  </script>
+</body>
+</html>
